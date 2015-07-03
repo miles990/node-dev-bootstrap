@@ -43,7 +43,7 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :inline => "sudo apt-get install -y tmux --no-install-recommends"
   
   config.vm.provision :shell, :inline => "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
-  config.vm.provision :shell, :inline => "echo "deb http://download.mono-project.com/repo/debian wheezy-libtiff-compat main" | sudo tee -a /etc/apt/sources.list.d/mono-xamarin.list"
+  config.vm.provision :shell, :inline => "echo 'deb http://download.mono-project.com/repo/debian wheezy-libtiff-compat main' | sudo tee -a /etc/apt/sources.list.d/mono-xamarin.list"
   config.vm.provision :shell, :inline => "sudo apt-get update"
   config.vm.provision :shell, :inline => "sudo apt-get install -y mono-devel --no-install-recommends"
   
