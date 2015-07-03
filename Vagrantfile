@@ -1,10 +1,16 @@
 Vagrant::Config.run do |config|
-  config.vm.box = "precise32"
+  config.vm.box = "trusty64"
   
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
+  config.vm.forward_port 22, 22
+  
   config.vm.forward_port 3000, 3000
+  
+  config.vm.forward_port 27017, 27017
 
+  config.vm.share_folder "app", "/home/vagrant/app", "app"
+  
   config.vm.share_folder "app", "/home/vagrant/app", "app"
 
   # Uncomment the following line to allow for symlinks
@@ -32,4 +38,33 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :inline => "sudo apt-get install -y ruby1.9.1-dev --no-install-recommends"
   config.vm.provision :shell, :inline => "sudo apt-get install -y ruby1.9.3 --no-install-recommends"
   config.vm.provision :shell, :inline => "sudo gem install cf"
+  
+  config.vm.provision :shell, :inline => "sudo apt-get install -y git --no-install-recommends"
+  config.vm.provision :shell, :inline => "sudo apt-get install -y tmux --no-install-recommends"
+  
+  config.vm.provision :shell, :inline => "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
+  config.vm.provision :shell, :inline => "echo "deb http://download.mono-project.com/repo/debian wheezy-libtiff-compat main" | sudo tee -a /etc/apt/sources.list.d/mono-xamarin.list"
+  config.vm.provision :shell, :inline => "sudo apt-get update"
+  config.vm.provision :shell, :inline => "sudo apt-get install -y mono-devel --no-install-recommends"
+  
+  config.vm.provision :shell, :inline => "sudo apt-get install -y libtool --no-install-recommends"
+  config.vm.provision :shell, :inline => "sudo apt-get install -y automake --no-install-recommends"
+  
+  config.vm.provision :shell, :inline => "cd ~"
+  config.vm.provision :shell, :inline => "git clone https://github.com/jedisct1/libsodium && cd libsodium"
+  config.vm.provision :shell, :inline => "./autogen.sh"
+  config.vm.provision :shell, :inline => "./configure"
+  config.vm.provision :shell, :inline => "sudo make"
+  config.vm.provision :shell, :inline => "sudo make install"
+  
+  config.vm.provision :shell, :inline => "sudo apt-get install -y pkg-config --no-install-recommends"
+  
+  config.vm.provision :shell, :inline => "cd ~"
+  config.vm.provision :shell, :inline => "wget http://download.zeromq.org/zeromq-4.1.1.tar.gz"
+  config.vm.provision :shell, :inline => "tar -xvzf zeromq-4.1.1.tar.gz"
+  config.vm.provision :shell, :inline => "cd zeromq-4.1.1"
+  config.vm.provision :shell, :inline => "./configure"
+  config.vm.provision :shell, :inline => "sudo make"
+  config.vm.provision :shell, :inline => "sudo make install"
+  config.vm.provision :shell, :inline => "sudo ldconfig"  
 end
