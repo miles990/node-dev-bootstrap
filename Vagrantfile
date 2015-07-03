@@ -48,28 +48,9 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :inline => "sudo apt-get update"
   config.vm.provision :shell, :inline => "sudo apt-get install -y mono-devel --no-install-recommends"
   
-  # 安裝ZeroMQ
+  # 安裝ZeroMQ 相關
   config.vm.provision :shell, :inline => "sudo apt-get install -y libtool --no-install-recommends"
   config.vm.provision :shell, :inline => "sudo apt-get install -y automake --no-install-recommends"
-  
-  config.vm.provision :shell, :inline => "cd ~"
-  config.vm.provision :shell, :inline => "wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz"
-  config.vm.provision :shell, :inline => "tar zxf LATEST.tar.gz"
-  config.vm.provision :shell, :inline => "cd libsodium*"
-  config.vm.provision :shell, :inline => "./configure"
-  config.vm.provision :shell, :inline => "sudo make && sudo make install"
-  config.vm.provision :shell, :inline => "sudo su"
-  config.vm.provision :shell, :inline => "echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf"
-  config.vm.provision :shell, :inline => "exit"
-  config.vm.provision :shell, :inline => "sudo ldconfig"
-  
   config.vm.provision :shell, :inline => "sudo apt-get install -y pkg-config --no-install-recommends"
   
-  config.vm.provision :shell, :inline => "cd ~"
-  config.vm.provision :shell, :inline => "wget http://download.zeromq.org/zeromq-4.1.1.tar.gz"
-  config.vm.provision :shell, :inline => "tar zxf zeromq-4.1.1.tar.gz"
-  config.vm.provision :shell, :inline => "cd zeromq*"
-  config.vm.provision :shell, :inline => "./configure"
-  config.vm.provision :shell, :inline => "sudo make && sudo make install"  
-  config.vm.provision :shell, :inline => "sudo ldconfig"  
 end
