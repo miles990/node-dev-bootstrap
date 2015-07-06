@@ -11,7 +11,7 @@ Vagrant::Config.run do |config|
 
   config.vm.share_folder "app", "/home/vagrant/app", "app"
   
-  config.vm.share_folder "aere_lstar", "/home/vagrant/aere_lstar", "aere_lstar"
+  config.vm.share_folder "home", "/home/vagrant/", "home"
 
   # Uncomment the following line to allow for symlinks
   # in the app folder. This will not work on Windows, and will
@@ -41,6 +41,7 @@ Vagrant::Config.run do |config|
   
   config.vm.provision :shell, :inline => "sudo apt-get install -y git --no-install-recommends"
   config.vm.provision :shell, :inline => "sudo apt-get install -y tmux --no-install-recommends"
+  config.vm.provision :shell, :inline => "sudo apt-get install -y vim --no-install-recommends"
   
   # 安裝ZeroMQ 相關
   config.vm.provision :shell, :inline => "sudo apt-get install -y libtool --no-install-recommends"
