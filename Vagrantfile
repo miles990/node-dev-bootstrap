@@ -11,7 +11,7 @@ Vagrant::Config.run do |config|
 
   config.vm.share_folder "app", "/home/vagrant/app", "app"
   
-  config.vm.share_folder "app", "/home/vagrant/app", "app"
+  config.vm.share_folder "aere_lstar", "/home/vagrant/aere_lstar", "aere_lstar"
 
   # Uncomment the following line to allow for symlinks
   # in the app folder. This will not work on Windows, and will
